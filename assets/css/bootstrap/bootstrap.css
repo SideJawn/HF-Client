@@ -5820,13 +5820,14 @@ a.close.disabled {
   display: flex;
   -ms-flex-direction: column;
   flex-direction: column;
-  width: 100%;
+  width: 80%;
   pointer-events: auto;
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.3rem;
   outline: 0;
+  margin-left: 10%;
 }
 
 .modal-backdrop {
@@ -9749,7 +9750,7 @@ button.bg-dark:focus {
 }
 
 .text-left {
-  text-align: left !important;
+  text-align: center !important;
 }
 
 .text-right {
