@@ -8,6 +8,9 @@ var qualitySuggestionBox = document.querySelector('#quality-suggestion');
 var environmentSuggestionBox = document.querySelector('#environment-suggestion');
 var serviceSuggestionBox = document.querySelector('#service-suggestion');
 
+var modal = $('.js-modal')[0];
+var svgElement = document.getElementById('status-svg');
+
 var uuidMap = {
     ratings : {
         1 : "76781f4e-4529-4b9a-81ad-4d7c9b59ad73",
@@ -75,40 +78,53 @@ function mapSubmissionData(){
     }
 }
 
-function createFailureDisplay(){
-    var svgElement = document.getElementById('status-svg');
-    svgElement.setAttribute('viewBox', '0 0 32 50');
+function createFailureDisplay(responseCode){
+    if(svgElement.childNodes[0] == null){
+        svgElement.setAttribute('viewBox', '0 0 32 50');
 
-    var group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    group.setAttribute('transform', 'matrix(2.32559 0 0 2.16757 -3.08855 -5.39032)');
-    group.setAttribute('stroke', '#F00');
-    group.setAttribute('stroke-linecap', 'round');
-    group.setAttribute('stroke-miterlimit', 4);
-    group.setAttribute('stroke-width', 1.867);
-    group.setAttribute('fill', 'none');
+        var group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        group.setAttribute('transform', 'matrix(2.32559 0 0 2.16757 -3.08855 -5.39032)');
+        group.setAttribute('stroke', '#F00');
+        group.setAttribute('stroke-linecap', 'round');
+        group.setAttribute('stroke-miterlimit', 4);
+        group.setAttribute('stroke-width', 1.867);
+        group.setAttribute('fill', 'none');
 
-    var path1 = document.createElementNS("http://www.w3.org/2000/svg", 'path'); //Create a path in SVG's namespace
-    path1.setAttribute("d","m2.34081,3.47772l5.7749,6.0785"); //Set path's data
-    var path2 = document.createElementNS("http://www.w3.org/2000/svg", 'path'); //Create a path in SVG's namespace
-    path2.setAttribute("d","m13.92071,3.45412l-5.775,6.0781"); //Set path's data
-    var path3 = document.createElementNS("http://www.w3.org/2000/svg", 'path'); //Create a path in SVG's namespace
-    path3.setAttribute("d","m2.34071,15.41022l5.775,-6.078"); //Set path's data
-    var path4 = document.createElementNS("http://www.w3.org/2000/svg", 'path'); //Create a path in SVG's namespace
-    path4.setAttribute("d","m13.92071,15.43322l-5.776,-6.078"); //Set path's data
+        var path1 = document.createElementNS("http://www.w3.org/2000/svg", 'path'); //Create a path in SVG's namespace
+        path1.setAttribute("d","m2.34081,3.47772l5.7749,6.0785"); //Set path's data
+        var path2 = document.createElementNS("http://www.w3.org/2000/svg", 'path'); //Create a path in SVG's namespace
+        path2.setAttribute("d","m13.92071,3.45412l-5.775,6.0781"); //Set path's data
+        var path3 = document.createElementNS("http://www.w3.org/2000/svg", 'path'); //Create a path in SVG's namespace
+        path3.setAttribute("d","m2.34071,15.41022l5.775,-6.078"); //Set path's data
+        var path4 = document.createElementNS("http://www.w3.org/2000/svg", 'path'); //Create a path in SVG's namespace
+        path4.setAttribute("d","m13.92071,15.43322l-5.776,-6.078"); //Set path's data
 
-    group.appendChild(path1);
-    group.appendChild(path2);
-    group.appendChild(path3);
-    group.appendChild(path4);
-    svgElement.appendChild(group);  
-    $('.modal-image').css('color', '#F00');
+        group.appendChild(path1);
+        group.appendChild(path2);
+        group.appendChild(path3);
+        group.appendChild(path4);
+        svgElement.appendChild(group);  
+        $('.modal-image').css('color', '#F00');
+    }
 
-    $('#modal-header').text("Sorry, we messed up on our end!");
-    $('#modal-first-line').text("If you still want to provide feedback, please let the staff know!");
+    if(responseCode == 404){
+        $('#modal-header').text("Sorry, we can't find this business in our database!");
+        $('#modal-first-line').text("If you still want to provide feedback, please let the staff know.");
+        $('#modal-second-line').text("If they don't use us, please let them know about us!");
+    }
+    else if(responseCode == 1){
+        $('#modal-header').text("Missing information!");
+        $('#modal-first-line').text("Please provide us with a rating before submitting");
+    }
+    else{
+        $('#modal-header').text("Sorry, we messed up on our end!");
+        $('#modal-first-line').text("If you still want to provide feedback, please let the staff know!");
+    }
 }
 
 function createSuccessDisplay(){
-    var svgElement = document.getElementById('status-svg');
+    if(svgElement.childNodes[0] != null)
+        svgElement.removeChild(svgElement.childNodes[0]);
     var newElement = document.createElementNS("http://www.w3.org/2000/svg", 'path'); //Create a path in SVG's namespace
     newElement.setAttribute("d","m0.44134,10.27561l4,-4l8,8l14,-14l4,4l-18,18l-12,-12z"); //Set path's data
     svgElement.setAttribute('viewBox', '0 0 32 32');
@@ -127,32 +143,108 @@ function validateForm(){
     return true;
   }
 
+function showModal() {
+    // Define initial properties
+    dynamics.css(modal, {
+    opacity: 0,
+    scale: .5
+    });
+    
+    // Animate to final properties
+    dynamics.animate(modal, {
+    opacity: 1,
+    scale: 1
+    }, {
+    type: dynamics.spring,
+    frequency: 300,
+    friction: 400,
+    duration: 1000
+    });
+}
+
+// toggleClass
+function toggleClass(elem, className) {
+    var newClass = ' ' + elem.className.replace(/[\t\r\n]/g, ' ') + ' ';
+    if (hasClass(elem, className)) {
+      while (newClass.indexOf(' ' + className + ' ') >= 0) {
+        newClass = newClass.replace(' ' + className + ' ', ' ');
+      }
+      elem.className = newClass.replace(/^\s+|\s+$/g, '');
+    } else {
+      elem.className += ' ' + className;
+    }
+}
+
+
+function showModalChildren() {
+    // Animate each child individually
+    for(var i=0; i<modalChildren.length; i++) {
+      var item = modalChildren[i];
+      
+      // Define initial properties
+      dynamics.css(item, {
+        opacity: 0,
+        translateY: 30
+      });
+  
+      // Animate to final properties
+      dynamics.animate(item, {
+        opacity: 1,
+        translateY: 0
+      }, {
+        type: dynamics.spring,
+        frequency: 300,
+        friction: 400,
+        duration: 1000,
+        delay: 100 + i * 40
+      });
+    } 
+}
+
+
 window.onload = function getBusinessId(){
-    // var businessName = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
-    businessName = "Pretoria";
+    var businessName = new URLSearchParams(window.location.search).get('b');
     var xhttp = new XMLHttpRequest();
-    var url = "http://localhost:8001/api/" + businessName;
+    var urlBusinessName = businessName.replace('/', "");
+    var url = "/api/business/alias/" + urlBusinessName;
+
     xhttp.onreadystatechange = function() {
-        if(this.readyState == 4 && this.status == 200) {
-            console.log("Successfully sent form data to flask. Status: " + this.status);
-            var response = JSON.parse(this.response)
-            if(response['business-id'] != null){
-                $('#business').attr('business-id', response['business-id']);
-                $('#business').text(response['business-name']);
+        window.history.pushState(null, null, businessName);
+        if(this.readyState == 4) {
+            if(this.status == 200){
+                var response = JSON.parse(this.response);
+                responseCode = response['status']['code'];
+                console.log(responseCode + ':' + response['status']['msg']);
+                if(responseCode == 200){
+                    if(response['business'] != null){
+                        $('#business').attr('business-id', response['business']['id']);
+                        $('#business').text(response['business']['name']);
+                    }
+                }
+                else{
+                    createFailureDisplay(responseCode);
+                    toggleClasses();
+                    showModal();
+                    showModalChildren();
+                }
             }
-            else if (this.readyState == 4){
-                console.log(response['status']);
-                location.replace("about.html");
+            else{
+                console.log(this.status);
+                createFailureDisplay(this.status);
+                toggleClasses();
+                showModal();
+                showModalChildren();
             }
         }
     };
+
     try{
         xhttp.open("GET", url, true);
         xhttp.setRequestHeader("Content-Type", "application/json");
-        xhttp.send(null);
+        xhttp.send();
     }
     catch(error){
-        console.error("Failed to send form data to flask. Error code: " + error);
+        console.error("Failed to connect to the back-end. Error code: " + error);
     }
 }
 
@@ -160,18 +252,28 @@ function sendSubmissionData(){
     if(validateForm()){
         mapSubmissionData();
         var xhttp = new XMLHttpRequest();
-        var url = "http://localhost:8001/api/submission";
+        var url = "/api/business/submission";
+
         xhttp.onreadystatechange = function() {
-            if(this.readyState == 4 && this.status == 200) {
-                console.log("Successfully sent form data to flask. Status: " + this.status);
-                console.log(this.response);
-                createSuccessDisplay();
-            }
-            else if(this.readyState == 4){
-                console.log(this.response);
-                createFailureDisplay();
+            if(this.readyState == 4) {
+                if(this.status == 200){
+                    var response = JSON.parse(this.response);
+                    responseCode = response['status']['code'];
+                    console.log(responseCode + ':' + response['status']['msg'])
+                    if(responseCode == 200) {
+                        createSuccessDisplay();
+                    }
+                    else if(responseCode == 500){
+                        createFailureDisplay(responseCode);
+                    }
+                }
+                else {
+                    console.log(this.status);
+                    createFailureDisplay(this.status);
+                }
             }
         };
+
         try{
             xhttp.open("PUT", url, true);
             xhttp.setRequestHeader("Content-Type", "application/json");
@@ -180,6 +282,9 @@ function sendSubmissionData(){
         catch(error){
             console.error("Failed to send form data to flask. Error code: " + error);
         }
+    }
+    else{
+        createFailureDisplay(1);
     }
 }
 

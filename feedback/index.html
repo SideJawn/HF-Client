@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<title>Honest Feedback</title>
+		<meta name="description" content="Free Bootstrap 4 Template by uicookies.com">
+		<meta name="keywords" content="Free website templates, Free bootstrap themes, Free template, Free bootstrap, Free website template">
+
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600|Montserrat:200,300,400" rel="stylesheet">
+
+		<link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="/assets/fonts/ionicons/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="/assets/css/slick.css">
+    <link rel="stylesheet" href="/assets/css/slick-theme.css">
+
+    <link rel="stylesheet" href="/assets/css/helpers.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/landing-2.css">
+    <link rel="stylesheet" href="/assets/css/accordion.css">
+
+    <script src="https://kit.fontawesome.com/4338a0022b.js" crossorigin="anonymous"></script>
+    
+	</head>
+	<body data-spy="scroll" data-target="#pb-navbar" data-offset="200">
+
+    <nav class="navbar navbar-expand-lg navbar-dark pb_navbar pb_scrolled-light" id="pb-navbar">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Honest Feedback</a>
+      </div>
+    </nav>
+    <!-- END nav -->
+
+    <section class="pb_cover_v3 overflow-hidden cover-bg-indigo cover-bg-opacity text-left pb_gradient_v1" id="section-home">
+      <div class="container">
+        <h2 id="business" class="mb-4 mt-0 text-center"></h2>
+        <div id="aspect-content">
+          <div class="aspect-tab ">
+            <input id="item-1" type="checkbox" class="aspect-input" name="aspect">
+            <label for="item-1" class="aspect-label"></label>
+            <div class="aspect-content">
+                <div class="aspect-info">
+                    <img class="icon" src="/assets/images/price_icon.svg">
+                    <span class="aspect-name">Price</span>
+                </div>
+                <div class="aspect-stat">
+                  <div class="range-values">
+                    <span class="price-value"></span>
+                  </div>
+                </div>
+            </div>
+            <div class="aspect-tab-content">
+                <div class="sentiment-wrapper">
+                  <div class="opinion-header">
+                      How reasonable is our pricing?
+                    <input
+                      type="range"
+                      id="price-rating"
+                      class="range"
+                      min="0"
+                      max="10"
+                      value="0">
+                    <textarea
+                      class="comments"
+                      maxlength="280"
+                      id="price-suggestion"
+                      placeholder="How can we make it worth it?"></textarea>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="aspect-tab ">
+            <input id="item-2" type="checkbox" class="aspect-input" name="aspect">
+            <label for="item-2" class="aspect-label"></label>
+            <div class="aspect-content">
+                <div class="aspect-info">
+                    <img class="icon" src="/assets/images/quality_icon.svg">
+                    <span class="aspect-name">Quality</span>
+                </div>
+                <div class="aspect-stat">
+                  <div class="range-values">
+                    <span class="quality-value"></span>
+                  </div>
+                </div>
+            </div>
+            <div class="aspect-tab-content">
+                <div class="sentiment-wrapper">
+                  <div class="opinion-header">
+                    How qualified are our offerings?
+                      <input
+                        type="range"
+                        id="quality-rating"
+                        min="0"
+                        max="10"
+                        value="0">
+                      <textarea
+                      class="comments"
+                      maxlength="280"
+                      id="quality-suggestion"
+                      placeholder="How can we be more qualified?"></textarea>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="aspect-tab ">
+            <input id="item-3" type="checkbox" class="aspect-input" name="aspect">
+            <label for="item-3" class="aspect-label"></label>
+            <div class="aspect-content">
+                <div class="aspect-info">
+                    <img class="icon" src="/assets/images/environment_icon.svg">
+                    <span class="aspect-name">Environment</span>
+                </div>
+                <div class="aspect-stat">
+                  <div class="range-values">
+                    <span class="environment-value"></span>
+                  </div>
+                </div>
+            </div>
+            <div class="aspect-tab-content">
+                <div class="sentiment-wrapper">
+                  <div class="opinion-header">
+                    How clean are we?
+                      <input
+                        type="range"
+                        id="environment-rating"
+                        min="0"
+                        max="10"
+                        value="0">
+                      <textarea
+                      class="comments"
+                      maxlength="280"
+                      id="environment-suggestion"
+                      placeholder="What should be improved?"></textarea>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="aspect-tab ">
+            <input id="item-4" type="checkbox" class="aspect-input" name="aspect">
+            <label for="item-4" class="aspect-label"></label>
+            <div class="aspect-content">
+                <div class="aspect-info">
+                    <img class="icon" src="/assets/images/customer_service.svg">
+                    <span class="aspect-name">Customer Service</span>
+                </div>
+                <div class="aspect-stat">
+                  <div class="range-values">
+                    <span class="service-value"></span>
+                  </div>
+                </div>
+            </div>
+            <div class="aspect-tab-content">
+                <div class="sentiment-wrapper">
+                  <div class="opinion-header">
+                    How did we make you feel?
+                      <input
+                        type="range"
+                        id="service-rating"
+                        min="0"
+                        max="10"
+                        value="0">
+                      <textarea
+                      class="comments"
+                      maxlength="280"
+                      id="service-suggestion"
+                      placeholder="What could we have done differently?"></textarea>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <button type="submit" id="submit-button" class="js-open btn-open is-active">Submit</button>
+      </div>
+    </section>
+
+    <div id="modal" class="modal js-modal">
+      <div class="modal-image">
+        <svg id="status-svg"></svg>
+      </div>
+      <h1 id="modal-header"></h1>
+      <p id="modal-first-line"></p>
+      <p id="modal-second-line"></p>
+      <button id="dismiss-btn" style="visibility: hidden" class="js-close">Dismiss</button>
+    </div>
+    <!-- END section -->
+
+    <footer class="pb_footer bg-light" role="contentinfo">
+      <div class="container">
+        <div class="row text-center">
+          <div class="col">
+            <ul class="list-inline">
+              <li class="list-inline-item"><a href="#" class="p-2"><i class="fa fa-facebook"></i></a></li>
+              <li class="list-inline-item"><a href="#" class="p-2"><i class="fa fa-twitter"></i></a></li>
+              <li class="list-inline-item"><a href="#" class="p-2"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-center">
+            <p class="pb_font-14">&copy; 2020. All Rights Reserved. <br>  <a href="https://uicookies.com/bootstrap-html-templates/">Bootstrap Templates</a> by uiCookies</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- loader -->
+    <div id="pb_loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#1d82ff"/></svg></div>
+
+    <script src="/assets/js/jquery.min.js"></script>
+
+    <script src="/assets/js/popper.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/slick.min.js"></script>
+    <script src="/assets/js/jquery.mb.YTPlayer.min.js"></script>
+
+    <script src="/assets/js/jquery.waypoints.min.js"></script>
+    <script src="/assets/js/jquery.easing.1.3.js"></script>
+
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/update-rating.js"></script>
+    <script src="/assets/js/data-management.js"></script>
+    <script src="/assets/js/modal.js"></script>
+
+
+	</body>
+</html>
